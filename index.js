@@ -6,11 +6,37 @@ const app = express()
 const PORT = process.env.PORT;
 const bodyParser = require('body-parser')
 var cors = require('cors')
-
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
 
 
 
 app.use(express.urlencoded({extended : true}))
+
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Census APP',
+            version: '1.0.0'
+        },
+        servers: [
+            {
+                url: `https://census-app-test.herokuapp.com`
+            }
+        ]
+
+    },
+    apis : ['./routers/*.js']
+}
+
+const swaggerSpac = swaggerJsDoc(options)
+// const bodyParser = require('body-parser')
+app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
+
+
+
 app.use(express.json())
 app.use(cors())
 
@@ -37,6 +63,16 @@ app.get('/',(req,res)=>{
 
 
 
-app.listen(PORT, function(){
+
+
+
+
+
+
+
+
+
+
+app.listen(PORT,"0.0.0.0", function(){
     console.log('server started successfully')
 })

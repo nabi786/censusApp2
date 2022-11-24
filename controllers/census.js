@@ -22,7 +22,7 @@ const getNICData = async (req,res)=>{
 
                 if(getNIC.IssueDate == req.body.IssueDate){
 
-
+                    
                     res.status(200).json({success : true, personData : getNIC})
 
 
@@ -51,6 +51,8 @@ const getNICData = async (req,res)=>{
 
 
 
+
+
 const addToCensusME = async (req,res)=>{
 
     try {
@@ -68,7 +70,7 @@ const addToCensusME = async (req,res)=>{
                 res.status(200).json({success : true, msg : "census successfully"})
             }else{
                 
-                res.status(404).json({success : false, msg : "already census"})
+                res.status(200).json({success : false, msg : "already census"})
                 
             }
             
@@ -81,7 +83,7 @@ const addToCensusME = async (req,res)=>{
 
 
     } catch (error) {
-
+        console.log(error)
         res.status(500).json({success : false, msg : "something went wrong in server"})
     }   
 }   
@@ -134,6 +136,10 @@ const add_to_Census_My_family = async (req,res)=>{
             res.status(500).json({success : false ,msg : "something went wrong in server"})
         }   
 }
+
+
+
+
 
 
 
