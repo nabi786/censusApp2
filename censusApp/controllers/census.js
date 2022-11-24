@@ -41,6 +41,7 @@ const getNICData = async (req,res)=>{
         }
 
     }catch(err){
+
         res.status(500).json({success : false ,msg:"something went wrong in server"})
     }
 }

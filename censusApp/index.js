@@ -21,7 +21,7 @@ app.use('/api',addNyc);
 app.use('/api',getAllCensus);
 
 
-app.get('*',(req,res)=>{
+app.get('/',(req,res)=>{
     res.status(200).json({msg: "census app working successfully"})
 })
 
