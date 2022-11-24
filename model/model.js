@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose')
+var validator = require('validator');
 
 
 const schema = mongoose.Schema({
@@ -40,10 +41,42 @@ const schema = mongoose.Schema({
 
 
 
+
+// admin schema
+
+const adminSchema = mongoose.Schema({
+    userName : {
+        type : String,
+    },
+    email : {
+        type : String,
+        required : true,
+        validate(value){
+            if(!validator.isEmail(value)){
+                throw new Error('Email is invalid');
+            }
+        }
+    },
+    password : {
+        type : String,
+        required : true
+    },
+    role : {
+        type : String,
+        required : true
+    }
+
+})
+
+
+
+
+
 const personData = mongoose.model('personData', schema)
+const adminData = mongoose.model('admin', adminSchema)
 
 const modelOBj = {
-    personData
+    personData,adminData
 }
 
 module.exports = modelOBj;
