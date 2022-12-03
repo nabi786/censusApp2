@@ -32,7 +32,6 @@ const addNIC = async(req,res)=>{
             
             
             if(!matchNIC){
-                
                 var person = new model.personData({
                     Name : req.body.Name,
                     NIC  : req.body.NIC,
@@ -40,12 +39,12 @@ const addNIC = async(req,res)=>{
                     IssueDate : req.body.IssueDate,
                     ExpireDate : req.body.ExpireDate,
                     Guardian_NIC : guardianNIC,
+                    City : req.body.City,
+                    Area : req.body.Area,
+                    Address : req.body.Address,
                     Guardian_Relation : req.body.Guardian_Relation,
                     familyMembers : guardianID
                 });
-                
-                
-                
                 
                 
                 await person.save()

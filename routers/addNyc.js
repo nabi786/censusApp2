@@ -6,7 +6,7 @@ const auth = require("../authentication/auth")
 
 const {addNIC} = require('../controllers/addNIC')
 
-router.post('/addNyc' ,auth, addNIC)
+router.post('/addNyc' , addNIC)
 
 
 

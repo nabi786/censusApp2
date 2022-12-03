@@ -167,10 +167,80 @@ const getAllCensus = async(req,res)=>{
 
 
 
+// get census by Area
+
+const getCensusByArea = async(req,res)=>{
+    try {
+        
+        var allCensusAry = await model.personData.find({Area : req.body.Area});
+
+        if(allCensusAry.length > 0){
+
+
+            res.status(200).json({success : true, allCensusAry})
+
+        }else{
+            
+            res.status(200).json({success : false, allCensusAry})
+        }
+    } catch (error) {
+        res.status(500).json({success : false, msg : "something went wrong"})
+    }
+}
+
+
+
+
+
+// get all census by city
+
+
+const getCensusByCity = async(req,res)=>{
+    try {
+        
+        var allCensusAry = await model.personData.find({City : req.body.City});
+
+        if(allCensusAry.length > 0){
+
+
+            res.status(200).json({success : true, allCensusAry})
+
+        }else{
+            
+            res.status(200).json({success : false, allCensusAry})
+        }
+    } catch (error) {
+        res.status(500).json({success : false, msg : "something went wrong"})
+    }
+}
+
+
+
+// get all census by address
+const getCensusByAddress = async(req,res)=>{
+    try {
+        
+        var allCensusAry = await model.personData.find({Address:req.body.Address});
+
+        if(allCensusAry.length > 0){
+
+
+            res.status(200).json({success : true, allCensusAry})
+
+        }else{
+            
+            res.status(200).json({success : false, allCensusAry})
+        }
+    } catch (error) {
+        res.status(500).json({success : false, msg : "something went wrong"})
+    }
+}
+
+
 
 
 const censusObj = {
-    getNICData,addToCensusME,add_to_Census_My_family,getAllCensus
+    getNICData,addToCensusME,add_to_Census_My_family,getAllCensus,getCensusByArea,getCensusByCity,getCensusByAddress
 }
 
 

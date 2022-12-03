@@ -23,7 +23,7 @@ const options = {
         },
         servers: [
             {
-                url: `https://census-app-test.herokuapp.com`
+                url: `https://census-app.vercel.app`
             }
         ]
 

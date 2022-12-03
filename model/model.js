@@ -30,6 +30,15 @@ const schema = mongoose.Schema({
         default : false
         
     },
+    City : {
+        type : String
+    },
+    Area : {
+        type : String
+    },
+    Address : {
+        type : String
+    },
     familyMembers : [{
         type : mongoose.Schema.Types.ObjectId,
          ref : "personData"
