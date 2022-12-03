@@ -36,7 +36,7 @@ const swaggerSpac = swaggerJsDoc(options)
 app.use('/api-doc',swaggerUI.serve, swaggerUI.setup(swaggerSpac))
 
 
-
+// midlwares
 app.use(express.json())
 app.use(cors())
 
