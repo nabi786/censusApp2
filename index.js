@@ -23,7 +23,7 @@ const options = {
         },
         servers: [
             {
-                url: `https://census-app.vercel.app`
+                url: `http://localhost:${PORT}`
             }
         ]
 
