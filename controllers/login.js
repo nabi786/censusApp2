@@ -26,24 +26,30 @@ const adminLogin = async (req,res)=>{
 
 
         var admin = await model.adminData.findOne({email : req.body.email})
+        
         if(admin){
-            
-            var isPassMatch = bcrypt.compareSync(req.body.password,admin.password)
-            
-            if(isPassMatch == true){
+            var role = req.body.role
+            if(admin.role == role){
 
-                var userID = admin._id
-               var token = jwt.sign({userID},process.env.SECRET_KEY,{
-                expiresIn : "24h"
-               })
-                adminData = [admin, {Token : token}]
-                res.status(200).json({success : true, adminData : adminData});
-
+                var isPassMatch = bcrypt.compareSync(req.body.password,admin.password)
+                if(isPassMatch == true){
+                    
+                    
+                    var userID = admin._id
+                    var token = jwt.sign({userID},process.env.SECRET_KEY,{
+                        expiresIn : "24h"
+                    })
+                    adminData = [admin, {Token : token}]
+                    res.status(200).json({success : true, adminData : adminData});
+                    
+                }else{
+                    res.status(404).json({success : false, msg : "invalid creditionals"})
+                }
             }else{
-                res.status(404).json({success : false, msg : "invalid email or password"})
+                res.status(404).json({success : false, msg : "invalid creditionals"})
             }
         }else{
-            res.status(404).json({success : false, msg : "invalid email or password"})
+            res.status(404).json({success : false, msg : "invalid creditionals"})
         }
 
 
@@ -71,17 +77,23 @@ const agentRegister= async(req,res)=>{
                 var password = req.body.password;
                 var hashedPass = bcrypt.hashSync(password,10) 
 
-            var newAgent = new model.adminData({
+            var isAlreadyEmail = await model.adminData.findOne({email : req.body.email})
+            
+            if(isAlreadyEmail){
+                res.status(200).json({sucess  : false, msg : "Email Already Exist "})
+            }
+            else{
+                var newAgent = new model.adminData({
                 userName : req.body.userName,
                 email : req.body.email,
                 password : hashedPass,
                 role : "Agent"
-            })
-
-
+            });
+            
             await newAgent.save();
-
+            
             res.status(200).json({sucess  : true, msg : "agent created succesfully"})
+        }
         }else{
             
             res.status(500).json({sucess  : false, msg : "Only admin can create Agents"})
