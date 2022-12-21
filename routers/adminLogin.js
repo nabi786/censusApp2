@@ -23,6 +23,17 @@ router.post("/loginAgent", loginObject.loginAgent);
 
 
 
+// get all aggents
+
+
+router.get("/getAgents", loginObject.getAllAgents);
+
+
+// dete agent
+router.delete("/detelAgents/:id", loginObject.detelAgent);
+
+
+
 // agent register
 
 

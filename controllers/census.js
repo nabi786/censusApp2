@@ -197,8 +197,10 @@ const getCensusByArea = async(req,res)=>{
 
 const getCensusByCity = async(req,res)=>{
     try {
-        
-        var allCensusAry = await model.personData.find({City : req.body.City});
+
+        var city = req.body.City
+        city = city.toLowerCase()
+        var allCensusAry = await model.personData.find({City : city});
 
         if(allCensusAry.length > 0){
 

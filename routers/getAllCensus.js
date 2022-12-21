@@ -8,13 +8,13 @@ router.get('/getAllCensus', getAllCensus.getAllCensus)
 
 
 // get census by area
-router.get('/getCensusByArea', getAllCensus.getCensusByArea)
+router.post('/getCensusByArea', getAllCensus.getCensusByArea)
 
 
 // get census by City
-router.get('/getCensusByCity', getAllCensus.getCensusByCity)
+router.post('/getCensusByCity', getAllCensus.getCensusByCity)
 
 // get census by Address
-router.get('/getCensusByAddress', getAllCensus.getCensusByAddress)
+router.post('/getCensusByAddress', getAllCensus.getCensusByAddress)
 
 module.exports = router

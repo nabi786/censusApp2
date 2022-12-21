@@ -153,8 +153,63 @@ const loginAgent = async(req,res)=>{
 
 
 
+
+// get all agents
+
+const getAllAgents  = async(req,res)=>{
+    try {
+        
+        var findAgents = await model.adminData.find({role : "Agent"});
+
+        if(findAgents){
+
+
+            res.status(200).json({success: true, data : findAgents})
+        }else{
+            res.status(404).json({success: false, data : []})
+
+        }
+        
+        
+        
+    } catch (error) {
+        res.status(500).json({success: false, msg : 'something went wrong in server'})
+    }
+}
+
+
+
+
+
+
+
+
+const detelAgent  = async(req,res)=>{
+    try {
+        
+        var findAgents = await model.adminData.findOne({_id : req.params.id});
+
+        if(findAgents){
+
+            await model.adminData.findOneAndDelete({_id : req.params.id});
+
+            res.status(200).json({success: true, msg : "Agent deleted Successfully"})
+        }else{
+            res.status(404).json({success: false, msg : "Agent already deleted"})
+        }
+        
+        
+        
+    } catch (error) {
+        res.status(500).json({success: false, msg : 'something went wrong in server'})
+    }
+}
+
+
+
+
 const loginObject = {
-    adminLogin,agentRegister,loginAgent
+    adminLogin,agentRegister,loginAgent,getAllAgents,detelAgent
 }
 
 

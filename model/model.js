@@ -43,7 +43,13 @@ const schema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
          ref : "personData"
     }],
-
+    witoutNIC : {
+        type : Boolean,
+        default : "false"
+    },
+    bayFormKey : {
+        type : Number,
+    }
 })
 
 
