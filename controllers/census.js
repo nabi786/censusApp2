@@ -106,14 +106,28 @@ const add_to_Census_My_family = async (req,res)=>{
                 if(idsAry.length > 0){
                     
                     
-                    // console.log(idsAry)
-                    // cencus to whole family memebers
-                    
+                
                     idsAry.forEach(async (item,index)=>{
                         var data = await model.personData.findOneAndUpdate({_id : item},{Census : true}); 
                     });
                      // finding current family owner
                     var familyOwner = await model.personData.findOne({NIC : currentFamilyOwnerNIC});
+
+                    // deleting not selected memebers from database and f-Member ary
+                    var allMembers = familyOwner.familyMembers;
+                   
+                    if(allMembers){
+                        allMembers.forEach((item1,index1)=>{
+
+                            idsAry.forEach(async(item2,index2)=>{
+                                if(item1 != item2){
+                                    await model.personData.findOneAndDelete({_id : item1}) 
+                                }
+                            })
+                                
+                        })
+                    }
+
 
                     familyOwner.familyMembers = idsAry;
 
@@ -241,8 +255,43 @@ const getCensusByAddress = async(req,res)=>{
 
 
 
+
+
+
+
+
+
+
+// get all data that have not NIC
+const getDataWihoutNIC = async(req,res)=>{
+    try {
+
+        var data = await model.personData.find({witoutNIC : true});
+
+
+        if(data != null){
+            
+            
+            res.status(200).json({data : data, success : true, Number_of_items : data.length})
+        }else{
+
+            res.status(200).json({msg : "no data found", success : false,Number_of_items : 0})
+        }
+        
+    } catch (error) {
+        res.status(500).json({msg: "something went wrong in server", success : false})
+    }
+}
+
+
+
+
+
+
+
 const censusObj = {
     getNICData,addToCensusME,add_to_Census_My_family,getAllCensus,getCensusByArea,getCensusByCity,getCensusByAddress
+    ,getDataWihoutNIC
 }
 
 

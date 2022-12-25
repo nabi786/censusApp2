@@ -20,9 +20,11 @@ const addNIC = async(req,res)=>{
             console.log("NIC length",nic.length)
             var withoutNICUniqueKey = 0;
             var witoutNIC = false;
-            var matchNIC = null
+            var matchNIC = null;
+            var censusData = false;
             if(nic.length == 0){
-                witoutNIC = true
+                witoutNIC = true;
+                censusData = true;
                 var findDataWithoutNIC = await model.personData.find({witoutNIC : true});
 
                 if(findDataWithoutNIC){
@@ -57,7 +59,7 @@ const addNIC = async(req,res)=>{
             }
             
 
-            
+            console.log("this id ate of birth", req.body.BirthDate)
            
             if(!matchNIC){
                 var person = new model.personData({
@@ -72,7 +74,9 @@ const addNIC = async(req,res)=>{
                     Guardian_Relation : req.body.Guardian_Relation.toLowerCase(),
                     familyMembers : guardianID,
                     witoutNIC : witoutNIC,
-                    bayFormKey : withoutNICUniqueKey
+                    bayFormKey : withoutNICUniqueKey,
+                    Census : censusData,
+                    Date_of_Birth : req.body.BirthDate
                 });
                 
                 
@@ -82,7 +86,8 @@ const addNIC = async(req,res)=>{
                     await guradianNic.save();
                 }
                 
-                res.status(200).json({success : true, msg : "person details added successfully"})
+
+                res.status(200).json({success : true, msg : "person details added successfully", NIC : person.NIC})
 
 
             }else{
@@ -97,6 +102,12 @@ const addNIC = async(req,res)=>{
         res.status(500).json({success : false, msg :"something went wrong with server"})
     }
 }
+
+
+
+
+
+
 
 
 

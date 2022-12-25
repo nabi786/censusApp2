@@ -1,4 +1,5 @@
 
+
 const mongoose = require('mongoose')
 var validator = require('validator');
 
@@ -27,8 +28,7 @@ const schema = mongoose.Schema({
         type : String
     },
     Census : {
-        default : false
-        
+        type : Boolean,
     },
     City : {
         type : String
@@ -49,6 +49,9 @@ const schema = mongoose.Schema({
     },
     bayFormKey : {
         type : Number,
+    },
+    Date_of_Birth : {
+        type : String
     }
 })
 

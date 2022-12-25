@@ -17,4 +17,10 @@ router.post('/getCensusByCity', getAllCensus.getCensusByCity)
 // get census by Address
 router.post('/getCensusByAddress', getAllCensus.getCensusByAddress)
 
+
+
+
+// get person that have not NIC
+router.get('/getDataWihoutNIC', getAllCensus.getDataWihoutNIC)
+
 module.exports = router
