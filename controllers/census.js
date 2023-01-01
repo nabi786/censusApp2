@@ -186,7 +186,7 @@ const getAllCensus = async(req,res)=>{
 const getCensusByArea = async(req,res)=>{
     try {
         
-        var allCensusAry = await model.personData.find({Area : req.body.Area});
+        var allCensusAry = await model.personData.find({Area : req.body.Area, Census : true});
 
         if(allCensusAry.length > 0){
 
@@ -214,7 +214,7 @@ const getCensusByCity = async(req,res)=>{
 
         var city = req.body.City
         city = city.toLowerCase()
-        var allCensusAry = await model.personData.find({City : city});
+        var allCensusAry = await model.personData.find({City : city, Census : true});
 
         if(allCensusAry.length > 0){
 
@@ -236,7 +236,7 @@ const getCensusByCity = async(req,res)=>{
 const getCensusByAddress = async(req,res)=>{
     try {
         
-        var allCensusAry = await model.personData.find({Address:req.body.Address});
+        var allCensusAry = await model.personData.find({Address:req.body.Address , Census : true});
 
         if(allCensusAry.length > 0){
 
@@ -266,7 +266,7 @@ const getCensusByAddress = async(req,res)=>{
 const getDataWihoutNIC = async(req,res)=>{
     try {
 
-        var data = await model.personData.find({witoutNIC : true});
+        var data = await model.personData.find({witoutNIC : true , Census : true});
 
 
         if(data != null){
